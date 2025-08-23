@@ -1,3 +1,5 @@
+from decimal import Decimal, InvalidOperation
+
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
@@ -25,7 +27,8 @@ def create_transfer(request):
     amount = request.data.get('amount')
     description = request.data.get('description', "")
 
-    if not all([from_account_id, to_account_id]):
+
+    if not all([from_account_id, to_account_id, amount]):
         return Response(
             {"error": "Необходимо указать from_account_id, to_account_id и amount"},
             status=status.HTTP_400_BAD_REQUEST
@@ -33,7 +36,21 @@ def create_transfer(request):
     from_account = get_object_or_404(Account, id=from_account_id, user=request.user)
     to_account = get_object_or_404(Account, id=to_account_id)
 
-    if from_account.balance <= float(amount):
+    try:
+        amount = Decimal(amount)
+        if amount <= 0:
+            return Response(
+                {"error": "Сумма должна быть больше 0."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        amount = amount.quantize(Decimal('0.01'))
+    except (ValueError, TypeError, InvalidOperation):
+        return Response(
+            {"error": "Некорректная сумма."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    if from_account.balance <= amount:
         return Response({"error": "Недостаточно средств на счёте"}, status=status.HTTP_400_BAD_REQUEST)
     if from_account.currency != to_account.currency:
         return Response({"error": "Перевод между разными валютами недоступен"}, status=status.HTTP_400_BAD_REQUEST)

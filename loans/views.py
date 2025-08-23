@@ -21,13 +21,31 @@ def apply_for_loan(request):
         return Response({'error': "Неполные данные"}, status=status.HTTP_400_BAD_REQUEST)
 
     account = get_object_or_404(Account, id=account_id, user=request.user)
-    loan = Loan.objects.create(user=request.user, account=account, amount=amount, term_months=term_months, status='pending')
-    from datetime import date, timedelta
-    for month in range(loan.term_months):
-        due_date = loan.start_date + timedelta(days=30*(month+1))
-        LoanPayment.objects.create(loan=loan, amount=loan.monthly_payment, due_date=due_date)
-    serializer = LoanSerializer(loan)
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
+    data = {
+        'user': request.user.id,
+        'account': account.id,
+        'amount': amount,
+        'term_months': term_months
+    }
+    serializer = LoanSerializer(data=data, context={'request': request})
+    if serializer.is_valid():
+        from django.db import transaction as db_transaction
+        with db_transaction.atomic():
+            loan = serializer.save()
+            from datetime import timedelta
+            for month in range(loan.term_months):
+                due_date = loan.start_date + timedelta(days=30 * (month + 1))
+                LoanPayment.objects.create(loan=loan, amount=loan.monthly_payment, due_date=due_date)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #loan = Loan.objects.create(user=request.user, account=account, amount=amount, term_months=term_months, status='pending')
+    #from datetime import date, timedelta
+    #for month in range(loan.term_months):
+    #    due_date = loan.start_date + timedelta(days=30*(month+1))
+    #    LoanPayment.objects.create(loan=loan, amount=loan.monthly_payment, due_date=due_date)
+    #serializer = LoanSerializer(loan)
+    #return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 @api_view(['GET'])
 @permission_classes(IsAuthenticated)

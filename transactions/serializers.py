@@ -13,10 +13,11 @@ class TransactionSerializer(serializers.ModelSerializer):
         model = Transaction
         fields = ['id',
                   'from_account',
-                  # ID счёта-отправителя (для записи)            'to_account',             # ID счёта-получателя (для записи)
+                  'to_account',             # ID счёта-получателя (для записи)
                   'from_account_number',
-                  # Номер счёта отправителя (только для чтения)            'to_account_number',      # Номер счёта получателя (чтение)
-                  'from_user',  # Логин отправителя            'to_user',                # Логин получателя
+                  'to_account_number',      # Номер счёта получателя (чтение)
+                  'from_user',
+                  'to_user',                # Логин получателя
                   'amount', 'transaction_type',
                   'status', 'description',
                   'timestamp']

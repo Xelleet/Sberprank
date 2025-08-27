@@ -11,16 +11,7 @@ class TransactionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Transaction
-        fields = ['id',
-                  'from_account',
-                  'to_account',             # ID счёта-получателя (для записи)
-                  'from_account_number',
-                  'to_account_number',      # Номер счёта получателя (чтение)
-                  'from_user',
-                  'to_user',                # Логин получателя
-                  'amount', 'transaction_type',
-                  'status', 'description',
-                  'timestamp']
+        fields = '__all__'
         # При создании транзакции from/to_account обязательны, остальное — автоматически
         extra_kwargs = {
         'from_account': {'required': True}, 'to_account': {'required': True},

@@ -63,6 +63,7 @@ def create_transfer(request):
     fee = amount * Decimal(TRANSFER_FEE_PERCENT / 100)
     fee = int(fee)
     amount_after_fee = amount - fee
+    amount_after_fee = float(amount_after_fee)
 
     if from_account.currency == to_account.currency:
         # Простой перевод
@@ -96,7 +97,7 @@ def create_transfer(request):
         from_account.save()
 
         # Зачисление в валюте получателя
-        to_account.balance += received_amount
+        to_account.balance += Decimal(received_amount)
         to_account.save()
 
         # Создание транзакции

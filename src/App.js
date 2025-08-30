@@ -2,6 +2,7 @@ import { useState } from 'react';
 import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
 import DashboardPage from './pages/Dashboard';
+import Transactions from './pages/transactions';
 
 const api_url = 'http://127.0.0.1:8000/api'
 

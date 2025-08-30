@@ -1,0 +1,115 @@
+/* Общий контейнер */
+.transactions-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px 25px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Заголовок */
+.transactions-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #222;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Список */
+.transactions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Пустой список */
+.no-transactions {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Элемент транзакции */
+.transactions-item {
+  background: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  padding: 15px 20px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover эффект */
+.transactions-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Внутренний текст */
+.transactions-item div {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #333;
+}
+
+.transactions-item strong {
+  color: #222;
+  font-weight: 600;
+}
+
+/* Статусы */
+.status {
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Цвета статусов */
+.status.success {
+  background: #e0f7ea;
+  color: #2e7d32;
+}
+
+.status.pending {
+  background: #fff4e5;
+  color: #ef6c00;
+}
+
+.status.failed {
+  background: #fdecea;
+  color: #c62828;
+}
+
+/* Лоадер */
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  margin-top: 40px;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+  .transactions-container {
+    padding: 15px;
+  }
+
+  .transactions-container h2 {
+    font-size: 20px;
+  }
+
+  .transactions-item {
+    padding: 12px 15px;
+  }
+
+  .transactions-item div {
+    font-size: 14px;
+  }
+}

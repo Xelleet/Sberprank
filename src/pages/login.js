@@ -6,6 +6,7 @@ export default function LoginPage({ onLogin }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    localStorage.removeItem('access');
     const formData = new FormData(e.target);
     try {
       const data = await loginUser({

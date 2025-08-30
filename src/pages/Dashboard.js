@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { fetchAccounts, transferMoney } from '../services/api';
+import Transactions from './transactions';
+import LoanManager from './LoanManager';
 
 export default function DashboardPage({ user, onLogout }) {
   const [accounts, setAccounts] = useState([]);
@@ -57,6 +59,8 @@ export default function DashboardPage({ user, onLogout }) {
         <input name="description" placeholder="Описание" value={transferData.description} onChange={handleTransferChange} />
         <button type="submit">Перевести</button>
       </form>
+      <Transactions/>
+      <LoanManager/>
     </div>
   );
 }

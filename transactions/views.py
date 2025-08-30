@@ -24,7 +24,7 @@ TRANSFER_FEE_PERCENT = 1.0
 @permission_classes([IsAuthenticated])
 def transactions_list(request):
     user_accounts = Account.objects.filter(user=request.user)
-    transactions = Transaction.objects.filter(from_account__in=user_accounts) | Transaction.objects.filter(to_account_in=user_accounts)
+    transactions = Transaction.objects.filter(from_account__in=user_accounts) | Transaction.objects.filter(to_account__in=user_accounts)
     transactions = transactions.order_by('-timestamp')
     serializer = TransactionSerializer(transactions, many=True)
     return Response(serializer.data)

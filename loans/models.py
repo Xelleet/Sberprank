@@ -1,3 +1,7 @@
+import time
+from datetime import datetime
+from decimal import Decimal
+
 from django.db import models
 from django.contrib.auth.models import User
 from accounts.models import Account
@@ -30,11 +34,14 @@ class Loan(models.Model):
         r = self.interest_rate / 100 / 12
         n = self.term_months
         if r > 0:
-            self.monthly_payment = self.amount * (r * (1 + r)**n) / ((1 + r)**n-1)
+            self.monthly_payment = float(self.amount) * float((r * (1 + r)**n)) / float(((1 + r)**n-1))
         else:
             self.monthly_payment = self.amount / n
 
-        self.remaining_balance = self.amount
+        if not self.start_date:
+            self.start_date = datetime.now()
+        if self._state.adding:
+            self.remaining_balance = self.amount
         self.end_date = self.start_date + timedelta(days=30 * n)
         super().save(*args, **kwargs)
 

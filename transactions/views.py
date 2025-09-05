@@ -80,7 +80,7 @@ def create_transfer(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        received_amount = amount_after_fee / rate
+        received_amount = float(amount_after_fee) / float(rate)
         exchange_rate = float(rate)
 
     # Проверка баланса

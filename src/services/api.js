@@ -33,4 +33,36 @@ export const fetchAccounts = () =>
 export const transferMoney = (transferData) =>
   apiRequest('POST', '/transactions/transfer/', transferData);
 
+export const createAccount = async (accountData) => {
+  try {
+    const response = await fetch(`${API_URL}/accounts/create/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('access')}`
+      },
+      body: JSON.stringify(accountData)
+    });
+
+    console.log('Response status:', response.status);
+    console.log('Response ok:', response.ok);
+
+    const responseData = await response.json();
+    console.log('Response data:', responseData);
+
+    if (!response.ok) {
+      const error = new Error(responseData.message || 'Ошибка создания счета');
+      error.response = response;
+      error.responseData = responseData;
+      throw error;
+    }
+
+    return responseData;
+    
+  } catch (error) {
+    console.error('API error:', error);
+    throw error;
+  }
+};
+
 export default apiRequest;

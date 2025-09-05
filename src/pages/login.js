@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { loginUser } from '../services/api';
+import '../styles/login.css';
 
 export default function LoginPage({ onLogin }) {
   const [error, setError] = useState("");
@@ -21,7 +22,7 @@ export default function LoginPage({ onLogin }) {
   };
 
   return (
-    <form onSubmit={handleLogin}>
+    <form className="login-form" onSubmit={handleLogin}>
       <h3>Вход</h3>
       {error && <p style={{color:"red"}}>{error}</p>}
       <input name="username" placeholder="Логин" required />

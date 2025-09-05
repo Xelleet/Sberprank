@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { fetchAccounts, transferMoney } from '../services/api';
 import Transactions from './transactions';
 import LoanManager from './LoanManager';
+import '../styles/dashboard.css';
+import CreateAccount from './create_account';
 
 export default function DashboardPage({ user, onLogout }) {
   const [accounts, setAccounts] = useState([]);
@@ -35,32 +37,64 @@ export default function DashboardPage({ user, onLogout }) {
   };
 
   return (
-    <div>
+  <div className="dashboard-container">
+    <div className="dashboard-header">
       <h1>Добро пожаловать, {user?.username}</h1>
-      <button onClick={onLogout}>Выйти</button>
-      {error && <p style={{color:"red"}}>{error}</p>}
+      <button className="logout-btn" onClick={onLogout}>Выйти</button>
+    </div>
+    
+    {error && <p className="error-message">{error}</p>}
+    
+    <section className="accounts-section">
       <h2>Ваши счета</h2>
-      <ul>
+      <ul className="accounts-list">
         {accounts.map(acc => (
-          <li key={acc.id}>{acc.account_number} ({acc.currency}) - {acc.balance}</li>
+          <li className="account-item" key={acc.id}>
+            {acc.account_number} ({acc.currency}) - {acc.balance}
+          </li>
         ))}
       </ul>
+    </section>
 
+    <section className="transfer-section">
       <h2>Перевод средств</h2>
-      <form onSubmit={handleTransfer}>
-        <select name="from_account_id" value={transferData.from_account_id} onChange={handleTransferChange} required>
-          <option value="">С какого счета</option>
-          {accounts.map(acc => (
-            <option key={acc.id} value={acc.id}>{acc.account_number} ({acc.balance})</option>
-          ))}
-        </select>
-        <input name="to_account_id" type="number" placeholder="ID получателя" value={transferData.to_account_id} onChange={handleTransferChange} required />
-        <input name="amount" type="number" step="0.01" placeholder="Сумма" value={transferData.amount} onChange={handleTransferChange} required />
-        <input name="description" placeholder="Описание" value={transferData.description} onChange={handleTransferChange} />
-        <button type="submit">Перевести</button>
+      <form className="transfer-form" onSubmit={handleTransfer}>
+        <div className="form-group">
+          <select name="from_account_id" value={transferData.from_account_id} onChange={handleTransferChange} required>
+            <option value="">С какого счета</option>
+            {accounts.map(acc => (
+              <option key={acc.id} value={acc.id}>{acc.account_number} ({acc.balance})</option>
+            ))}
+          </select>
+        </div>
+        
+        <div className="form-group">
+          <input name="to_account_id" type="number" placeholder="ID получателя" value={transferData.to_account_id} onChange={handleTransferChange} required />
+        </div>
+        
+        <div className="form-group">
+          <input name="amount" type="number" step="0.01" placeholder="Сумма" value={transferData.amount} onChange={handleTransferChange} required />
+        </div>
+        
+        <div className="form-group">
+          <input name="description" placeholder="Описание" value={transferData.description} onChange={handleTransferChange} />
+        </div>
+        
+        <button className="transfer-btn" type="submit">Перевести</button>
       </form>
+    </section>
+
+    <section className='create-account-section'>
+      <CreateAccount/>
+    </section>
+    
+    <section className="transactions-section">
       <Transactions/>
+    </section>
+    
+    <section className="loan-manager-section">
       <LoanManager/>
-    </div>
-  );
+    </section>
+  </div>
+);
 }

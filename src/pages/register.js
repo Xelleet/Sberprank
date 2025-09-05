@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { registerUser } from '../services/api';
+import '../styles/register.css'
+
 
 export default function RegisterPage({ onReg }) {
   const [error, setError] = useState("");
@@ -25,7 +27,7 @@ export default function RegisterPage({ onReg }) {
   };
 
   return (
-    <form onSubmit={handleRegister}>
+    <form className='register-form' onSubmit={handleRegister}>
       <h3>Регистрация</h3>
       {error && <p style={{color:"red"}}>{error}</p>}
       <input name="username" placeholder="Username" required />

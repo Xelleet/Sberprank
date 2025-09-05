@@ -168,7 +168,7 @@ const LoanManager = () => {
                                 <option value="">Выберите счёт</option>
                                 {accounts.map((acc) => (
                                     <option key={acc.id} value={acc.id}>
-                                        {acc.account_type} (ID: {acc.id}, Баланс: {acc.balance} ₽)
+                                        {acc.account_type} (ID: {acc.id}, Баланс: {acc.balance} {acc.currency})
                                     </option>
                                 ))}
                             </select>

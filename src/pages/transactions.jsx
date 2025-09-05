@@ -11,11 +11,16 @@ const[form, setForm] = useState({
     amount: "",
     description: ""
 });
+const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
 
 const fetchTransactions = async() => {
     try{
         const token = localStorage.getItem('access');
-        const response = await fetch('http://127.0.0.1:8000//api/transactions/', {
+        const response = await fetch('http://127.0.0.1:8000/api/transactions/', {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -46,61 +51,69 @@ const handleCHange = (e) => {
 if (isLoading){
     return <div className='loading'>Загрузка транзакций...</div>
 }
-return(
-<div>
-    <div className='transactions-container'>
-        <h2>История транзакций</h2>
-        <ul className='transactions-list'>
+return (
+    <div>
+      <div className='transactions-container'>
+        <div className='transactions-header' onClick={toggleCollapse}>
+          <h2>История транзакций</h2>
+          <span className='collapse-icon'>
+            {isCollapsed ? '▼' : '▲'}
+          </span>
+        </div>
+        
+        {!isCollapsed && (
+          <ul className='transactions-list'>
             {transactions.length === 0 ? (
-                <li className='no-transactions'>Нет транзакций</li>
+              <li className='no-transactions'>Нет транзакций</li>
             ) : (
-                transactions.map((tx) => (
-                    <li key={tx.id} className='transactions-item'>
-                        <div>
-                            <strong>Тип:</strong> {tx.transaction_type}
-                        </div>
-                        <div>
-                            <strong>Отправитель:</strong> {tx.from_account?.id} ({tx.from_account?.currency})
-                        </div>
-                        <div>
-                            <strong>Получатель:</strong> {tx.to_account?.id} ({tx.to_account?.currency0})
-                        </div>
-                        <div>
-                            <strong>Отправлено:</strong> {tx.amount} {tx.from_account?.currency}
-                        </div>
-                        {tx.received_amount && (
-                <div>
-    <strong>Получено:</strong> {Number(tx.received_amount).toFixed(2)} {tx.to_account?.currency}
-  </div>
-              )}
-              {tx.fee > 0 && (
-                <div>
-                  <strong>Комиссия:</strong> {tx.fee} {tx.from_account?.currency}
-                </div>
-              )}
-              {tx.exchange_rate && (
-                <div>
-                  <strong>Курс:</strong> 1 {tx.from_account?.currency} = {tx.exchange_rate} {tx.to_account?.currency}
-                </div>
-              )}
-              <div>
-                <strong>Статус:</strong> <span className={`status ${tx.status}`}>{tx.status}</span>
-              </div>
-              <div>
-                <strong>Дата:</strong> {new Date(tx.timestamp).toLocaleString()}
-              </div>
-              {tx.description && (
-                <div>
-                    <strong>Описание:</strong> {tx.description}
-                </div>
-              )}
-                    </li>
-                ))
+              transactions.map((tx) => (
+                <li key={tx.id} className='transactions-item'>
+                  <div>
+                    <strong>Тип:</strong> {tx.transaction_type}
+                  </div>
+                  <div>
+                    <strong>Отправитель:</strong> {tx.from_account?.id} ({tx.from_account?.currency})
+                  </div>
+                  <div>
+                    <strong>Получатель:</strong> {tx.to_account?.id} ({tx.to_account?.currency})
+                  </div>
+                  <div>
+                    <strong>Отправлено:</strong> {tx.amount} {tx.from_account?.currency}
+                  </div>
+                  {tx.received_amount && (
+                    <div>
+                      <strong>Получено:</strong> {Number(tx.received_amount).toFixed(2)} {tx.to_account?.currency}
+                    </div>
+                  )}
+                  {tx.fee > 0 && (
+                    <div>
+                      <strong>Комиссия:</strong> {tx.fee} {tx.from_account?.currency}
+                    </div>
+                  )}
+                  {tx.exchange_rate && (
+                    <div>
+                      <strong>Курс:</strong> 1 {tx.from_account?.currency} = {tx.exchange_rate} {tx.to_account?.currency}
+                    </div>
+                  )}
+                  <div>
+                    <strong>Статус:</strong> <span className={`status ${tx.status}`}>{tx.status}</span>
+                  </div>
+                  <div>
+                    <strong>Дата:</strong> {new Date(tx.timestamp).toLocaleString()}
+                  </div>
+                  {tx.description && (
+                    <div>
+                      <strong>Описание:</strong> {tx.description}
+                    </div>
+                  )}
+                </li>
+              ))
             )}
-        </ul>
+          </ul>
+        )}
+      </div>
     </div>
-</div>
-)
+  );
 }
 
 export default Transactions;

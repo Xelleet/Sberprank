@@ -71,7 +71,7 @@ def create_transfer(request):
     else:
         # Конвертация
         rate_key = (from_account.currency, to_account.currency)
-        rate = EXCHANGE_RATES.get(rate_key)
+        rate = Decimal(EXCHANGE_RATES.get(rate_key))
 
         if not rate:
             return Response(

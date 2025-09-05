@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-n3=vkk^m7org_cq#!5y_+h+f*7*@l)%((xz+tdj3ak)uw+5+lw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'https://sberprank-cc6a.vercel.app',
+]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",

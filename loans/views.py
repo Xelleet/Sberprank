@@ -48,7 +48,7 @@ def apply_for_loan(request):
 
 
 @api_view(['GET'])
-@permission_classes(IsAuthenticated)
+@permission_classes([IsAuthenticated])
 def my_loans(request):
     loans = Loan.objects.filter(user=request.user).order_by('-start_date')
     serializer = LoanSerializer(loans, many=True)
@@ -70,7 +70,7 @@ def loan_detail(request, loan_id):
 @permission_classes([IsAuthenticated])
 def make_loan_payment(request, loan_id):
     loan = get_object_or_404(Loan, id=loan_id, user=request.user)
-    payment = get_object_or_404(LoanPayment, loan=loan, is_paid=False, paid_date__isnull=True)
+    payment = LoanPayment.objects.filter(loan=loan, is_paid=False, paid_date__isnull=True).first()
 
     if loan.account.balance < payment.amount:
         return Response({"error": "Недостаточно средств"}, status=status.HTTP_400_BAD_REQUEST)

@@ -24,7 +24,7 @@ TRANSFER_FEE_PERCENT = 1.0
 @permission_classes([IsAuthenticated])
 def transactions_list(request):
     user_accounts = Account.objects.filter(user=request.user)
-    transactions = Transaction.objects.filter(from_account__in=user_accounts) | Transaction.objects.filter(to_account_in=user_accounts)
+    transactions = Transaction.objects.filter(from_account__in=user_accounts) | Transaction.objects.filter(to_account__in=user_accounts)
     transactions = transactions.order_by('-timestamp')
     serializer = TransactionSerializer(transactions, many=True)
     return Response(serializer.data)
@@ -63,6 +63,7 @@ def create_transfer(request):
     fee = amount * Decimal(TRANSFER_FEE_PERCENT / 100)
     fee = int(fee)
     amount_after_fee = amount - fee
+    amount_after_fee = float(amount_after_fee)
 
     if from_account.currency == to_account.currency:
         # Простой перевод
@@ -96,7 +97,7 @@ def create_transfer(request):
         from_account.save()
 
         # Зачисление в валюте получателя
-        to_account.balance += received_amount
+        to_account.balance += Decimal(received_amount)
         to_account.save()
 
         # Создание транзакции

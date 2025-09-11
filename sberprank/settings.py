@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    'https://sberprank-oqg7.vercel.app'
 ]
 
 CORS_ALLOW_CREDENTIALS = True

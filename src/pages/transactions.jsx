@@ -20,7 +20,7 @@ const [isCollapsed, setIsCollapsed] = useState(false);
 const fetchTransactions = async() => {
     try{
         const token = localStorage.getItem('access');
-        const response = await fetch('http://127.0.0.1:8000/api/transactions/', {
+        const response = await fetch('https://sberprank-2.onrender.com/api/transactions/', {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`,

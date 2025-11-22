@@ -11,22 +11,23 @@
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-4.2-green?logo=django&logoColor=white)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
+![MIT License](https://img.shields.io/badge/License-MIT-yellow)
+![Status: Ready](https://img.shields.io/badge/Status-Ready-brightgreen)
 
-**SberPank** — учебный проект, имитирующий банковское приложение с возможностью управления счетами, транзакциями и займами.
+**SberPank** — учебный проект, имитирующий банковское приложение с управлением счетами, транзакциями и займами.
 
 ---
 
 ## 🚀 Установка
 
-1. Клонируйте репозиторий:
+✅ Клонируйте репозиторий:
 
 ```bash
 git clone https://github.com/your-username/sberprank.git
 cd sberprank
 ```
 
-2. Создайте виртуальное окружение и активируйте его:
+✅ Создайте виртуальное окружение и активируйте его:
 
 ```bash
 python -m venv env
@@ -36,19 +37,19 @@ source env/bin/activate
 env\Scripts\activate
 ```
 
-3. Установите зависимости:
+✅ Установите зависимости:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Примените миграции базы данных:
+✅ Примените миграции:
 
 ```bash
 python manage.py migrate
 ```
 
-5. Запустите сервер разработки:
+✅ Запустите сервер разработки:
 
 ```bash
 python manage.py runserver
@@ -61,45 +62,45 @@ python manage.py runserver
 Приложение предоставляет следующие возможности:
 
 ### 👤 Аутентификация пользователей
-- Регистрация нового пользователя  
-- Вход в существующий аккаунт  
+- 🟢 Регистрация нового пользователя  
+- 🟢 Вход в существующий аккаунт  
 
 ### 💼 Управление счетами
-- Просмотр списка счетов пользователя  
-- Создание нового счёта  
-- Пополнение счёта  
+- 🟢 Просмотр списка счетов  
+- 🟢 Создание нового счёта  
+- 🟢 Пополнение счёта  
 
 ### 💸 Транзакции
-- Просмотр списка транзакций  
-- Перевод средств между счетами  
+- 🟢 Просмотр списка транзакций  
+- 🟢 Перевод средств между счетами  
 
 ### 🏦 Управление займами
-- Оформление нового займа  
-- Просмотр списка займов  
-- Погашение займа  
+- 🟢 Оформление нового займа  
+- 🟢 Просмотр списка займов  
+- 🟢 Погашение займа  
 
 ---
 
 ## 🔗 API
 
-| Endpoint | Метод | Описание |
-|---------|--------|----------|
-| `/api/users/login/` | POST | Вход |
-| `/api/users/register/` | POST | Регистрация |
-| `/api/accounts/` | GET | Список счетов |
-| `/api/accounts/create/` | POST | Создать счёт |
-| `/api/transactions/` | GET | Список транзакций |
-| `/api/transactions/transfer/` | POST | Перевод |
-| `/api/loans/apply/` | POST | Подать заявку на займ |
-| `/api/loans/` | GET | Список займов |
-| `/api/loans/{loan_id}/` | GET | Детали займа |
-| `/api/loans/{loan_id}/pay/` | POST | Погасить займ |
+| Endpoint | Метод | Статус | Описание |
+|---------|--------|--------|----------|
+| `/api/users/login/` | POST | 🟢 | Вход |
+| `/api/users/register/` | POST | 🟢 | Регистрация |
+| `/api/accounts/` | GET | 🟢 | Список счетов |
+| `/api/accounts/create/` | POST | 🟢 | Создать счёт |
+| `/api/transactions/` | GET | 🟢 | Список транзакций |
+| `/api/transactions/transfer/` | POST | 🟢 | Перевод |
+| `/api/loans/apply/` | POST | 🟢 | Подать заявку на займ |
+| `/api/loans/` | GET | 🟢 | Список займов |
+| `/api/loans/{loan_id}/` | GET | 🟢 | Детали займа |
+| `/api/loans/{loan_id}/pay/` | POST | 🟢 | Погасить займ |
 
 ---
 
 ## 🤝 Вклад в проект
 
-Приветствуются issue и pull‑request’ы.
+📝 Приветствуются issue и pull‑request’ы для улучшений.
 
 ---
 
@@ -109,6 +110,8 @@ python manage.py runserver
 python manage.py test
 ```
 
+> 🔵 Все тесты ✅ пройдены, функционал стабилен.
+
 ---
 
 ## 📜 Лицензия
@@ -116,5 +119,3 @@ python manage.py test
 Проект распространяется под лицензией **MIT**.
 
 ---
-
-> 🔥 Этот README оптимизирован для тёмной темы GitHub и выглядит аккуратно при любом просмотре.

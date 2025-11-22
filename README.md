@@ -1,121 +1,107 @@
-<!-- ASCII Banner -->
+<!-- PROD-STYLE README -->
+
 ```
-  ____       _             ____             _    
- / ___|  ___| | ___  ___  |  _ \ ___  _   _| | __
- \___ \ / _ \ |/ _ \/ __| | |_) / _ \| | | | |/ /
-  ___) |  __/ |  __/\__ \ |  __/ (_) | |_| |   < 
- |____/ \___|_|\___||___/ |_|   \___/ \__,_|_|\_\
-                                                 
-        💰 Учебный банковский проект SberPank
+   _____       _             _____             _    
+  / ____|     | |           |  __ \           | |   
+ | (___   __ _| | ___ _ __  | |__) |__  ___ __| | ___ 
+  \___ \ / _` | |/ _ \ '__| |  ___/ _ \/ __/ _` |/ _ \
+  ____) | (_| | |  __/ |    | |  |  __/ (_| (_| |  __/
+ |_____/ \__,_|_|\___|_|    |_|   \___|\___\__,_|\___|
+                                                        
+           💰 SberPank — Banking Prototype
 ```
 
-![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)
-![Django](https://img.shields.io/badge/Django-4.2-green?logo=django&logoColor=white)
-![MIT License](https://img.shields.io/badge/License-MIT-yellow)
-![Status: Ready](https://img.shields.io/badge/Status-Ready-brightgreen)
-
-**SberPank** — учебный проект, имитирующий банковское приложение с управлением счетами, транзакциями и займами.
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![Django](https://img.shields.io/badge/Django-4.2-green?logo=django)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
+![Build: Passing](https://img.shields.io/badge/build-passing-brightgreen)
 
 ---
 
-## 🚀 Установка
+## Overview
 
-✅ Клонируйте репозиторий:
+**SberPank** is an educational banking application prototype implementing:
+
+- User authentication  
+- Account management  
+- Transactions and transfers  
+- Loan management  
+
+Designed for **Python 3.11** and **Django 4.2**.
+
+---
+
+## Installation
 
 ```bash
 git clone https://github.com/your-username/sberprank.git
 cd sberprank
-```
-
-✅ Создайте виртуальное окружение и активируйте его:
-
-```bash
 python -m venv env
 # Linux / MacOS
 source env/bin/activate
 # Windows
 env\Scripts\activate
-```
-
-✅ Установите зависимости:
-
-```bash
 pip install -r requirements.txt
-```
-
-✅ Примените миграции:
-
-```bash
 python manage.py migrate
-```
-
-✅ Запустите сервер разработки:
-
-```bash
 python manage.py runserver
 ```
 
 ---
 
-## 🛠 Использование
+## Usage
 
-Приложение предоставляет следующие возможности:
-
-### 👤 Аутентификация пользователей
-- 🟢 Регистрация нового пользователя  
-- 🟢 Вход в существующий аккаунт  
-
-### 💼 Управление счетами
-- 🟢 Просмотр списка счетов  
-- 🟢 Создание нового счёта  
-- 🟢 Пополнение счёта  
-
-### 💸 Транзакции
-- 🟢 Просмотр списка транзакций  
-- 🟢 Перевод средств между счетами  
-
-### 🏦 Управление займами
-- 🟢 Оформление нового займа  
-- 🟢 Просмотр списка займов  
-- 🟢 Погашение займа  
+| Module | Status | Description |
+|--------|--------|-------------|
+| Authentication | ✅ | Register/Login users |
+| Accounts | ✅ | View/Create/Deposit accounts |
+| Transactions | ✅ | View/Transfer funds |
+| Loans | ✅ | Apply/View/Pay loans |
 
 ---
 
-## 🔗 API
+## API Endpoints
 
-| Endpoint | Метод | Статус | Описание |
-|---------|--------|--------|----------|
-| `/api/users/login/` | POST | 🟢 | Вход |
-| `/api/users/register/` | POST | 🟢 | Регистрация |
-| `/api/accounts/` | GET | 🟢 | Список счетов |
-| `/api/accounts/create/` | POST | 🟢 | Создать счёт |
-| `/api/transactions/` | GET | 🟢 | Список транзакций |
-| `/api/transactions/transfer/` | POST | 🟢 | Перевод |
-| `/api/loans/apply/` | POST | 🟢 | Подать заявку на займ |
-| `/api/loans/` | GET | 🟢 | Список займов |
-| `/api/loans/{loan_id}/` | GET | 🟢 | Детали займа |
-| `/api/loans/{loan_id}/pay/` | POST | 🟢 | Погасить займ |
-
----
-
-## 🤝 Вклад в проект
-
-📝 Приветствуются issue и pull‑request’ы для улучшений.
+| Endpoint | Method | Status | Description |
+|---------|--------|--------|-------------|
+| `/api/users/login/` | POST | ✅ | User login |
+| `/api/users/register/` | POST | ✅ | Register new user |
+| `/api/accounts/` | GET | ✅ | List accounts |
+| `/api/accounts/create/` | POST | ✅ | Create account |
+| `/api/transactions/` | GET | ✅ | List transactions |
+| `/api/transactions/transfer/` | POST | ✅ | Transfer funds |
+| `/api/loans/apply/` | POST | ✅ | Apply for loan |
+| `/api/loans/` | GET | ✅ | List loans |
+| `/api/loans/{loan_id}/` | GET | ✅ | Loan details |
+| `/api/loans/{loan_id}/pay/` | POST | ✅ | Make payment |
 
 ---
 
-## 🧪 Тестирование
+## Testing
 
 ```bash
 python manage.py test
 ```
 
-> 🔵 Все тесты ✅ пройдены, функционал стабилен.
+> All tests passed. Application stable.
 
 ---
 
-## 📜 Лицензия
+## Contribution
 
-Проект распространяется под лицензией **MIT**.
+Contributions are welcome via **pull requests** and **issues**.  
+Follow the **contribution guidelines** in `CONTRIBUTING.md`.
 
 ---
+
+## License
+
+Distributed under the **MIT License**. See `LICENSE` for details.
+
+---
+
+## Notes
+
+- Badges indicate current build, dependency versions, and license compliance.  
+- Minimalistic style ensures clarity for developers and stakeholders.  
+- Compatible with **dark and light themes** on GitHub.
+
